@@ -1,9 +1,4 @@
-import { Column, CreateDateColumn, Entity, UpdateDateColumn } from "typeorm";
-import { PrimaryGeneratedColumn } from "typeorm/browser";
-
-
-
-
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 @Entity('tb_categorias')
 export class Categoria {
     @PrimaryGeneratedColumn()
@@ -21,3 +16,4 @@ export class Categoria {
     @UpdateDateColumn({name: 'updated_at'})
     updatedAt: Date;
 }
+

@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
+import { ILike, Repository } from "typeorm";
 import { Categoria } from "../entities/categoria.entity";
 
 
@@ -26,12 +26,19 @@ export class CategoriaService {
         return categoria;
     }
 
+    async findByNome(nome: string): Promise<Categoria[]> {
+        return await this.categoriaRepository.find({
+            where: { nome: ILike(`%${nome}%`) },
+        });
+    }
+
+
     async update(id: number, dados: Categoria): Promise<Categoria> {
         const categoria = await this.findOne(id);
         return this.categoriaRepository.save({ ...categoria, ...dados });
     }
 
-    async remove(id: number): Promise<void> {
+    async delete(id: number): Promise<void> {
         const categoria = await this.findOne(id);
         await this.categoriaRepository.delete(categoria);
     }
